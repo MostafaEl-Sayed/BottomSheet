@@ -28,6 +28,7 @@ public class Bottomsheet {
                 containerViewHeightConstraint?.constant = initializeHeight
             }
         }
+        open var isTopRounded: Bool = true
         open var viewActionType: BottomsheetController.OverlayViewActionType = .tappedDismiss
         open var duration: (hide: TimeInterval, show: TimeInterval, showAll: TimeInterval) = (0.3, 0.3, 0.3)
         open var overlayBackgroundColor: UIColor? {
@@ -469,6 +470,16 @@ private extension BottomsheetController {
         view.addSubview(overlayView)
         containerView.transform = CGAffineTransform(translationX: 0, y: initializeHeight)
         view.addSubview(containerView)
+        if isTopRounded {
+            roundViews()
+        }
+    }
+    func roundViews() {
+        self.containerView.layer.cornerRadius = 15
+        self.containerView.layer.borderWidth = 1
+        //        self.containerView.layer.borderColor = UIColor.lightGray.cgColor
+        self.containerView.clipsToBounds = true
+        self.containerView.layer.shadowOpacity = 1
     }
     func configureConstraints() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
