@@ -477,7 +477,7 @@ private extension BottomsheetController {
     func roundViews() {
         self.containerView.layer.cornerRadius = 15
         self.containerView.layer.borderWidth = 1
-        //        self.containerView.layer.borderColor = UIColor.lightGray.cgColor
+        self.containerView.layer.borderColor = UIColor.clear.cgColor
         self.containerView.clipsToBounds = true
         self.containerView.layer.shadowOpacity = 1
     }
