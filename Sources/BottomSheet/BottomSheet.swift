@@ -82,7 +82,7 @@ public class Bottomsheet {
             return view.frame.height
         }
         fileprivate var moveRange: (down: CGFloat, up: CGFloat) {
-            return (initializeHeight / 3, initializeHeight / 3)
+            return (initializeHeight / 20, initializeHeight / 20)
         }
         private var statusBarHeight: CGFloat {
             return UIApplication.shared.statusBarFrame.height
