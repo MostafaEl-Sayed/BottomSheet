@@ -64,6 +64,7 @@ public class Bottomsheet {
         fileprivate var contentView: UIView?
         fileprivate var scrollView: UIScrollView?
         fileprivate var isScrollEnabledInSheet: Bool = true
+        fileprivate var isDummyViewStyle = false
         fileprivate var hasBar: Bool {
             if let _ = bar {
                 return true
@@ -389,6 +390,7 @@ public class Bottomsheet {
             }
         }
         @objc dynamic func handleGestureDragging(_ gestureRecognizer: UIPanGestureRecognizer) {
+            if isDummyViewStyle { return }
             let gestureView = gestureRecognizer.view
             let point = gestureRecognizer.translation(in: gestureView)
             let originY = maxHeight - initializeHeight
@@ -683,8 +685,15 @@ extension Bottomsheet {
 }
  // MARK: BottomsheetUtilities
 open class BottomsheetUtilities {
-    public static func createBottomSheet<Destination,Source>(with bottomSheetVC: Destination, from sourceVC: Source, presentedWithHeight: CGFloat? = 300, configurationHandler: ((Destination, BottomsheetController) -> Void)) {
+    public static func createBottomSheet<Destination,Source>(
+        with bottomSheetVC: Destination,
+        from sourceVC: Source,
+        presentedWithHeight: CGFloat? = 300,
+        isDummyViewStyle: Bool = false,
+        configurationHandler: ((Destination, BottomsheetController) -> Void)
+    ) {
         let bottomSheet = BottomsheetController()
+        bottomSheet.isDummyViewStyle = isDummyViewStyle
         bottomSheet.addContainer(with: bottomSheetVC) { (T) in
             configurationHandler(T, bottomSheet)
         }
