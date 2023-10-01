@@ -432,26 +432,6 @@ public class Bottomsheet {
                 // Disable swipe down
                 // TODO: To be updated
                 return
-                switch gestureRecognizer.state {
-                case .began:
-                    scrollView?.isScrollEnabled = false
-                case .changed:
-                    let currentTransformY = containerView.transform.ty
-                    containerView.transform = CGAffineTransform(translationX: 0, y: currentTransformY + point.y)
-                    gestureRecognizer.setTranslation(.zero, in: gestureView)
-                case .ended, .cancelled:
-                    scrollView?.isScrollEnabled = true
-                    if containerView.transform.ty > moveRange.down {
-                        dismiss()
-                    } else {
-                        let animations = {
-                            self.containerView.transform = CGAffineTransform.identity
-                        }
-                        UIView.perform(.delete, on: [], options: [], animations: animations, completion: nil)
-                    }
-                default:
-                    break
-                }
             default:
                 break
             }
